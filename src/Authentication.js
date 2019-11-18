@@ -6,11 +6,21 @@ import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import { auth, db } from "./firebase";
+import { auth, db, fb } from "./firebase";
+import { StyledFirebaseAuth } from "react-firebaseui/StyledFirebaseAuth";
 
-export function SignIn(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export function Login(props) {
+  const uiConfig = {
+    // Popup signin flow rather than redirect flow.
+    signInFlow: "popup",
+    // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
+    signInSuccessUrl: "/App/",
+    // We will display Google and Facebook as auth providers.
+    signInOptions: [
+      fb.auth.EmailAuthProvider.PROVIDER_ID,
+      fb.auth.GoogleAuthProvider.PROVIDER_ID
+    ]
+  };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(u => {
@@ -22,6 +32,26 @@ export function SignIn(props) {
 
     return unsubscribe;
   }, [props.history]);
+
+  return (
+    <div>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography color="inherit" variant="h6">
+            Sign In
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <div style={{ marginTop: 20 }}>
+        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
+      </div>
+    </div>
+  );
+}
+
+export function SignIn(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSignIn = () => {
     console.log(email);

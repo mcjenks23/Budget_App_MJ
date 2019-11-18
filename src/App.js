@@ -33,31 +33,6 @@ export function App(props) {
     return unsubscribe;
   }, [props.history]);
 
-  useEffect(() => {
-    let unsubscribe;
-
-    if (user) {
-      unsubscribe = () => {
-        db.collection("users")
-          .doc(user.uid)
-          .collection("tasks")
-          .onSnapshot(snapshot => {
-            const user_tasks = snapshot.docs.map(qs => {
-              const task = {
-                id: qs.id,
-                text: qs.data().text,
-                complete: qs.data().complete
-              };
-              return task;
-            });
-            setTasks(user_tasks);
-          });
-      };
-    }
-
-    return unsubscribe;
-  }, [user]);
-
   const handleMenuOpen = () => {
     setDrawerOpen(true);
   };
