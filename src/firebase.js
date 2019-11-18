@@ -3,13 +3,14 @@ import "firebase/auth";
 import "firebase/firestore";
 
 const config = {
-  apiKey: "AIzaSyAWPqfo5ycw82KR72s5fRHTYtf1mEek8h8",
-  authDomain: "authentication-64d08.firebaseapp.com",
-  databaseURL: "https://authentication-64d08.firebaseio.com",
-  projectId: "authentication-64d08",
-  storageBucket: "",
-  messagingSenderId: "404553418409",
-  appId: "1:404553418409:web:694d62963d637722900bb8"
+  apiKey: "AIzaSyCnRw0mLx64LJgE_nqx0yoXLo7G2mXbpB8",
+  authDomain: "budget-app-caf46.firebaseapp.com",
+  databaseURL: "https://budget-app-caf46.firebaseio.com",
+  projectId: "budget-app-caf46",
+  storageBucket: "budget-app-caf46.appspot.com",
+  messagingSenderId: "646486656292",
+  appId: "1:646486656292:web:a15a70581e4c934e54dfb1",
+  measurementId: "G-1327LTP9VL"
 };
 
 firebase.initializeApp(config);
