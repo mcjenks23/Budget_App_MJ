@@ -7,14 +7,17 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { auth, db, fb } from "./firebase";
-import { StyledFirebaseAuth } from "react-firebaseui/StyledFirebaseAuth";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import * as firebaseui from "firebaseui";
 
 export function Login(props) {
   const uiConfig = {
     // Popup signin flow rather than redirect flow.
     signInFlow: "popup",
+    // Disable Account chooser flow
+    credentialHelper: firebaseui.auth.CredentialHelper.NONE,
     // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-    signInSuccessUrl: "/App/",
+    signInSuccessUrl: "/app/",
     // We will display Google and Facebook as auth providers.
     signInOptions: [
       fb.auth.EmailAuthProvider.PROVIDER_ID,
