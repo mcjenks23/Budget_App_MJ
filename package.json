@@ -9,6 +9,7 @@
     "firebase": "^5.10.0",
     "firebaseui": "4.3.0",
     "immer": "^1.8.0",
+    "plaid": "4.3.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-firebaseui": "4.0.0",
