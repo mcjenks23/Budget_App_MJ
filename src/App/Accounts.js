@@ -20,6 +20,10 @@ export default function Accounts(props) {
     // handle the case when your user exits Link
   };
 
+  const addAccount = () => {
+    //Save Account Access and Item to db
+  };
+
   return (
     <div>
       <PlaidLink
