@@ -29,7 +29,7 @@ module.exports = {
       "5dd59eca22b50f0014db7daf",
       "94ff2564990bc76c2939b9b0ea4b79",
       "1b29ff6476cba215f6542447539724",
-      "sandbox",
+      plaid.environments.sandbox,
       { version: "2018-05-22" }
     );
     return plaidClient.exchangePublicToken(data.token).then(apiResponse => {

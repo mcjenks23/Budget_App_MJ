@@ -8,9 +8,13 @@ export default function Accounts(props) {
   const handleOnSuccess = (token, metadata) => {
     console.log(token, metadata);
     const getToken = functions.httpsCallable("exchangeToken");
-    getToken({ token: token }).then(result => {
-      console.log(result);
-    });
+    getToken({ token: token })
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
   const handleOnExit = () => {
     // handle the case when your user exits Link
@@ -25,6 +29,7 @@ export default function Accounts(props) {
         publicKey="1b29ff6476cba215f6542447539724"
         onExit={handleOnExit}
         onSuccess={handleOnSuccess}
+        style={{ width: 100 }}
       >
         Add Account
       </PlaidLink>
