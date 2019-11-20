@@ -1,5 +1,5 @@
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
 
 admin.initializeApp();
 
@@ -12,15 +12,21 @@ const db = admin.firestore();
  * @param {Object} context Details about the event.
  */
 const createProfile = (userRecord, context) => {
-    const {email, uid } = userRecord;
+  const { email, uid } = userRecord;
 
-    return db
-        .collection('users')
-        .doc(uid)
-        .set({ email })
-        .catch(console.error);
+  return db
+    .collection("users")
+    .doc(uid)
+    .set({ email })
+    .catch(console.error);
 };
 
 module.exports = {
-    authOnCreate: functions.auth.user().onCreate(createProfile),
+  authOnCreate: functions.auth.user().onCreate(createProfile),
+  exchangeToken: functions.https.onCall((data, context) => {
+    console.log(data);
+    return {
+      accesstoken: "Sweet!"
+    };
+  })
 };

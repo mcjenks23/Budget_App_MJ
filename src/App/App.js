@@ -7,15 +7,14 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import Drawer from "@material-ui/core/Drawer";
-import { Link } from "react-router-dom";
-import { auth, db } from "./firebase";
+import { Link, Route } from "react-router-dom";
+import { auth, db } from "../firebase";
 import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import Accounts from "./Accounts";
+import Transactions from "./Transactions";
 
 export function App(props) {
   const [drawer_open, setDrawerOpen] = useState(false);
@@ -56,26 +55,6 @@ export function App(props) {
     return <div />;
   }
 
-  const sideList = side => (
-    <div>
-      <List>
-        {["Te Amo"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {
-                <IconButton>
-                  <FavoriteIcon />
-                </IconButton>
-              }
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-    </div>
-  );
-
   return (
     <div>
       <AppBar position="static">
@@ -88,7 +67,7 @@ export function App(props) {
             variant="h6"
             style={{ marginLeft: 15, flexGrow: 1 }}
           >
-            News
+            My App
           </Typography>
           <Typography color="inherit" style={{ marginRight: 30 }}>
             Hi! {user.email}
@@ -100,8 +79,61 @@ export function App(props) {
         </Toolbar>
       </AppBar>
       <Drawer open={drawer_open} onClose={handleCloseDrawer}>
-        {sideList("left")}
+        <List>
+          <ListItem
+            button
+            to={"/app/"}
+            component={Link}
+            onClick={() => {
+              setDrawerOpen(false);
+            }}
+          >
+            <ListItemText primary="Overview" />
+          </ListItem>
+          <ListItem
+            button
+            to={"/app/accounts/"}
+            component={Link}
+            onClick={() => {
+              setDrawerOpen(false);
+            }}
+          >
+            <ListItemText primary="Accounts" />
+          </ListItem>
+          <ListItem
+            button
+            to={"/app/transactions/"}
+            component={Link}
+            onClick={() => {
+              setDrawerOpen(false);
+            }}
+          >
+            <ListItemText primary="Transactions" />
+          </ListItem>
+          <ListItem
+            button
+            to={"/app/budgets/"}
+            component={Link}
+            onClick={() => {
+              setDrawerOpen(false);
+            }}
+          >
+            <ListItemText primary="Budgets" />
+          </ListItem>
+        </List>
       </Drawer>
+      <Route
+        path="/app/accounts/"
+        render={() => {
+          return <Accounts />;
+        }}
+      />
+      <Route
+        path="/app/transactions/"
+        render={() => {
+          return <Transactions />;
+        }}
+      />
     </div>
   );
 }
