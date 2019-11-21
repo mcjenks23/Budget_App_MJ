@@ -40,9 +40,8 @@ module.exports = {
         .collection("users")
         .doc(uid)
         .collection("accounts")
-        .add({ Token: accessToken, itemId: itemId }).catch((error)=>{
-          console.log(error)
-        });
+        .set({ Token: accessToken, itemId: itemId })
+        .catch(console.error);
     });
   })
 };
