@@ -35,8 +35,7 @@ module.exports = {
     return plaidClient.exchangePublicToken(data.token).then(apiResponse => {
       var accessToken = apiResponse.access_token;
       var itemId = apiResponse.item_id;
-      const uid = context.auth.uid;
-      console.log(uid);
+      const uid = context.uid;
       return db
         .collection("users")
         .doc(uid)
