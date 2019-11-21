@@ -39,8 +39,8 @@ module.exports = {
       return db
         .collection("users")
         .doc(uid)
-        .collection("accounts")
-        .set({ Token: accessToken, itemId: itemId })
+        .collection("items")
+        .add({ Token: accessToken, itemId: itemId })
         .catch(console.error);
     });
   })
