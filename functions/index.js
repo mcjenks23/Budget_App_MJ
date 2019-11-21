@@ -25,6 +25,7 @@ const createProfile = (userRecord, context) => {
 module.exports = {
   authOnCreate: functions.auth.user().onCreate(createProfile),
   exchangeToken: functions.https.onCall((data, context) => {
+    const uid = context.uid;
     const plaidClient = new plaid.Client(
       "5dd59eca22b50f0014db7daf",
       "94ff2564990bc76c2939b9b0ea4b79",
@@ -35,7 +36,6 @@ module.exports = {
     return plaidClient.exchangePublicToken(data.token).then(apiResponse => {
       var accessToken = apiResponse.access_token;
       var itemId = apiResponse.item_id;
-      const uid = context.uid;
       return db
         .collection("users")
         .doc(uid)

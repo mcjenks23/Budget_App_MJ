@@ -7,6 +7,7 @@ import { functions } from "../firebase";
 export default function Accounts(props) {
   const handleOnSuccess = (token, metadata) => {
     console.log(token, metadata);
+    console.log(props.user);
     functions.httpsCallable("exchangeToken", props.user);
   };
   const handleOnExit = () => {
