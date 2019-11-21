@@ -7,14 +7,7 @@ import { functions } from "../firebase";
 export default function Accounts(props) {
   const handleOnSuccess = (token, metadata) => {
     console.log(token, metadata);
-    const getToken = functions.httpsCallable("exchangeToken");
-    getToken({ token: token })
-      .then(result => {
-        console.log(result);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    functions.httpsCallable("exchangeToken");
   };
   const handleOnExit = () => {
     // handle the case when your user exits Link

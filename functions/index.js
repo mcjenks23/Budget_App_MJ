@@ -35,7 +35,12 @@ module.exports = {
     return plaidClient.exchangePublicToken(data.token).then(apiResponse => {
       var accessToken = apiResponse.access_token;
       var itemId = apiResponse.item_id;
-      return { accessToken: accessToken, itemId: itemId };
+      const uid = context.auth.uid;
+      return db
+        .collection("users")
+        .doc(uid)
+        .collection("accounts")
+        .add({ Token: accessToken, itemId: itemId });
     });
   })
 };

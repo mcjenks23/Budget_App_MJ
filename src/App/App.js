@@ -125,7 +125,7 @@ export function App(props) {
       <Route
         path="/app/accounts/"
         render={() => {
-          return <Accounts />;
+          return <Accounts user={user} />;
         }}
       />
       <Route
