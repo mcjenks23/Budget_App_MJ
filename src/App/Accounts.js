@@ -8,7 +8,9 @@ export default function Accounts(props) {
   const handleOnSuccess = (token, metadata) => {
     console.log(token, metadata);
     console.log(props.user);
-    functions.httpsCallable("exchangeToken", props.user);
+    //Exchange Token
+    const getToken = functions.httpsCallable("exchangeToken");
+    getToken({ token: token });
   };
   const handleOnExit = () => {
     // handle the case when your user exits Link
