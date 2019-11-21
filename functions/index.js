@@ -36,6 +36,7 @@ module.exports = {
       var accessToken = apiResponse.access_token;
       var itemId = apiResponse.item_id;
       const uid = context.auth.uid;
+      console.log(uid);
       return db
         .collection("users")
         .doc(uid)
