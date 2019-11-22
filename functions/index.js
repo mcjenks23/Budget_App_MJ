@@ -43,5 +43,24 @@ module.exports = {
         .add({ Token: accessToken, itemId: itemId })
         .catch(console.error);
     });
+  }),
+  getPlaidData: functions.https.onCall((data, context) => {
+    const uid = context.auth.uid;
+    db.collection("users")
+      .doc(uid)
+      .collection("items")
+      .onSnapshot(snapshot => {
+        const array = snapshot.docs
+          .map(a => {
+            const object = {
+              accessToken: a.Token,
+              itemId: a.itemID
+            };
+            return object;
+          })
+          .then(() => {
+            return array;
+          });
+      });
   })
 };

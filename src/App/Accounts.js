@@ -2,7 +2,7 @@ import React from "react";
 import AccountCard from "./AccountCard";
 import Button from "@material-ui/core/Button";
 import PlaidLink from "react-plaid-link";
-import { functions } from "../firebase";
+import { functions, db } from "../firebase";
 
 export default function Accounts(props) {
   const handleOnSuccess = (token, metadata) => {
@@ -16,8 +16,10 @@ export default function Accounts(props) {
     // handle the case when your user exits Link
   };
 
-  const addAccount = () => {
-    //Save Account Access and Item to db
+  const getAccessToken = () => {
+    const getObject = functions.httpsCallable("getPlaidData");
+    const newObject = getObject();
+    console.log(newObject);
   };
 
   return (
@@ -35,6 +37,7 @@ export default function Accounts(props) {
       </PlaidLink>
       Accounts
       <AccountCard />
+      <Button onClick={getAccessToken}>Access</Button>
     </div>
   );
 }
