@@ -46,21 +46,21 @@ module.exports = {
   }),
   getPlaidData: functions.https.onCall((data, context) => {
     const uid = context.auth.uid;
-    db.collection("users")
+    let arr = [];
+    arr = db
+      .collection("users")
       .doc(uid)
       .collection("items")
-      .onSnapshot(snapshot => {
-        const array = snapshot.docs
-          .map(a => {
-            const object = {
-              accessToken: a.Token,
-              itemId: a.itemID
-            };
-            return object;
-          })
-          .then(() => {
-            return array;
-          });
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          const obj = doc;
+          return obj;
+        });
+        return arr;
+      })
+      .catch(err => {
+        console.log("Error getting documents", err);
       });
   })
 };

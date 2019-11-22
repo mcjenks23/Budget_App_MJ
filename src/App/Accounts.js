@@ -18,8 +18,8 @@ export default function Accounts(props) {
 
   const getAccessToken = () => {
     const getObject = functions.httpsCallable("getPlaidData");
-    const newObject = getObject();
-    console.log(newObject);
+    const newArray = getObject();
+    console.log(newArray);
   };
 
   return (
